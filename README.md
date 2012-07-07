@@ -2,8 +2,12 @@ node-postgres-hstore
 ======
 
 Provides basic hstore parsing and stringify methods (stringify / parse) for 
-use with hstore datatype in postgres 9.0+. Intended to be used with 
+use with hstore datatype in postgres. Intended to be used with 
 node-postgres
+
+**Note**: this doesnt do any fancy type metadata serialization, so if you need something other
+than string -> string/null then hstore isnt a good fit, look at JSON support in
+postgresql 9.2/9.3.
 
 integration
 =======
@@ -15,7 +19,7 @@ primary pg object that we could use, so path hacking it is.
 
 A simple example of what you may have to do (see exp/test.js):
 
-``
+```javascript
 var pg = require('pg');
 var hstore = require('../index'); //your code = require('node-postgres-hstore')
 var path = require('path');
@@ -40,25 +44,26 @@ pg.connect(conString, function(err, client) {
     process.exit();
   })
 });
-``
+```
 
 serialization:
-node-postgres doesnt have any extensions point for serialization, so you have to
+node-postgres doesnt have any extension points for serialization, so you have to
 do this in your own layers, although it looks like it may come soon [query.js#L130](https://github.com/brianc/node-postgres/blob/master/lib/query.js#L130)
 
-``
+```javascript
 var hstore = require('node-postgres-hstore');
 var strOutput = hstore.stringify(payload);
-``
+```
 
-future
+future - node-postgres integration
 =======
 
-As of accb94b (07/07/12) the unit tests are failing, I suspect this is part of an
+As of commit accb94b (07/07/12) the unit tests of node-postgres are failing, I suspect this is part of an
 overhaul as they target node v0.8.x. I will revisit once things have stablized
-again and attempt to expose a clean way to register parser, a way to register
-serializers, and possibly an explicit method to collect up the metadata for 
-custom types (needs some though as we dont want to invisibly be hitting the db).
+again and attempt to expose a clean way to register parsers, a way to register
+serializers, and possibly an explicit method to collect up the metadata (oids) for 
+custom types (needs some thought as we dont want to invisibly be hitting the db).
+TODO: consult with maintainers of node-postgres
 
 install
 =======
@@ -75,7 +80,7 @@ npm test
 
 license
 =======
-The MIT License
+The MIT License 
 
 author
 =======
