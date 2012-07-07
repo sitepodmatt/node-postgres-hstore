@@ -2,12 +2,11 @@
   "author": "Matt Freeman <matt@nonuby.com> (http://blog.nonuby.com)",
   "name": "node-postgres-hstore",
   "description": "hstore stringify and parse functions for node-postgres parser/serializing",
-  "version": "0.0.1",
+  "keywords": ['hstore','postgresql','postgres'],
+  "version": "0.0.2",
   "homepage": "http://www.github.com/nonuby/node-postgres-hstore",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/nonuby/node-postgres-hstore.git"
-  },
+  "repository": "git://github.com/nonuby/node-postgres-hstore.git",
+  "main": "index",
   "dependencies": {},
   "devDependencies": {
     "underscore": "~1.3.3",
