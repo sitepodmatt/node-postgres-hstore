@@ -3,7 +3,9 @@ node-postgres-hstore
 
 Provides basic hstore parsing and stringify methods (stringify / parse) for 
 use with hstore datatype in postgres. Intended to be used with 
-node-postgres
+node-postgres. The existing solutions on npmjs didnt handle null correctly, or had other
+flaws that made it easier to write my own, of course this probably has it own
+defects and flaws to, **it will do for now**.
 
 **Note**: this doesnt do any fancy type metadata serialization, so if you need something other
 than string -> string/null then hstore isnt a good fit, look at JSON support in
@@ -12,7 +14,7 @@ postgresql 9.2/9.3.
 integration
 =======
 
-parser:
+**parser**:
 there doesnt seem to be a clean hook point, the FAQ refers to a test that 
 includes the pgtypes file via a relative path, I couldnt see anything on the
 primary pg object that we could use, so path hacking it is.
@@ -34,10 +36,27 @@ var hstoreOid = 74144; // different for every db
 var pgTypes = require(path.join(path.dirname(require.resolve('pg')),'types'));
 pgTypes.setTypeParser(hstoreOid, hstore.parse)
 
+var payload = {
+  a: 1,
+  b: true,
+  c: false,
+  d: null,
+  e: "Matt single' quote",
+  f: "Matt double quote\" ",
+  g: "/usr/local/bin",
+  h: "c:\\windozes\\mshell\\killme"
+};
+
+console.log(payload.h)
+
 pg.connect(conString, function(err, client) {
-  var query = client.query("SELECT 'a => b'::hstore As test");
+  var query = client.query("SELECT $1::hstore As test", [hstore.stringify(payload)]);
   query.on('row', function(row) {
-    console.dir(row);
+    console.log(row.test.d)
+    console.log(row.test.e)
+    console.log(row.test.f)
+    console.log(row.test.g)
+    console.log(row.test.h)
   });
   query.on('end', function(row) {
     client.end();
@@ -46,7 +65,7 @@ pg.connect(conString, function(err, client) {
 });
 ```
 
-serialization:
+**serialization:**
 node-postgres doesnt have any extension points for serialization, so you have to
 do this in your own layers, although it looks like it may come soon [query.js#L130](https://github.com/brianc/node-postgres/blob/master/lib/query.js#L130)
 
