@@ -24,7 +24,7 @@ module.exports.stringify = function(val) {
     var value = val[key];
     value = value === null ? 'NULL' : JSON.stringify(value.toString());
     return '"' + key + '" => ' + value;
-  }).join(', ');
+  }).join(', ') || 'hstore(array[]::varchar[])';
 
   return result;
 
