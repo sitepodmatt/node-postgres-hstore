@@ -1,6 +1,8 @@
 node-postgres-hstore
 ======
 
+* NOTE: Sorry, this is no longer maintained, I am currently not active in node.js space. *
+
 Provides basic hstore parsing and stringify methods (stringify / parse) for 
 use with hstore datatype in postgres. Intended to be used with 
 node-postgres. The existing solutions on npmjs didnt handle null correctly, or had other
@@ -100,9 +102,4 @@ npm test
 license
 =======
 The MIT License 
-
-author
-=======
-[Twitter - @nonuby](http://www.twitter.com/nonuby)  
-[Nonuby Blog](http://blog.nonuby.com/) 
 
