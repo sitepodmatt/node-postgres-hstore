@@ -1,5 +1,5 @@
 {
-  "author": "Matt Freeman <matt@nonuby.com> (http://blog.nonuby.com)",
+  "author": "Matt Freeman - No longer maintained",
   "name": "node-postgres-hstore",
   "description": "hstore stringify and parse functions for node-postgres parser/serializing",
   "keywords": ["hstore","postgresql","postgres"],
