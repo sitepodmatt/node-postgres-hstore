@@ -1,9 +1,9 @@
 {
-  "author": "Matt Freeman - No longer maintained",
+  "author": "sitepodmatt <matt@sitepod.io>",
   "name": "node-postgres-hstore",
-  "description": "hstore stringify and parse functions for node-postgres parser/serializing",
+  "description": "hstore stringify and parse functions for node-postgres parser/serializing - NO LONGER MAINTAINED",
   "keywords": ["hstore","postgresql","postgres"],
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "http://www.github.com/nonuby/node-postgres-hstore",
   "repository": "git://github.com/nonuby/node-postgres-hstore.git",
   "main": "index",
